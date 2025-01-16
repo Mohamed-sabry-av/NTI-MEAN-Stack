@@ -1,0 +1,35 @@
+<header>
+    <div class="header">
+      <div class="navBar">
+        <ul class="navBarContainer">
+          <li><a routerLink="home" class="home" routerLinkActive="active">Home</a></li>
+          <li><a routerLink="categories" class="categories" routerLinkActive="active">Categories</a></li>
+          <li><a routerLink="about" class="about" routerLinkActive="active">About</a></li>
+          <li><a routerLink="products" class="products" routerLinkActive="active">Products</a></li>
+          <li><a routerLink="productPage" class="productPage" routerLinkActive="active">productPage</a></li>
+          <li><a routerLink="cart" class="cart" routerLinkActive="active">Cart</a></li>
+        </ul>
+      </div>
+      <div class="logo">
+        <a href="#">
+          <img src="imges/logo.png" alt="logo" />
+        </a>
+      </div>
+      <ul class="right-section">
+        <li><a routerLink="search"><i class="bi bi-search"></i></a></li>
+        <!-- <li><a><i class="bi bi-person" routerLink="/login"></i></a></li> -->
+        <li *ngIf="!isLoggedIn"><a routerLink="/login"><i class="bi bi-person"></i> Login</a></li>
+        <li *ngIf="isLoggedIn"><a (click)="logout()"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+      
+        <li><a routerLink="liked"><i class="bi bi-heart"></i></a></li>
+        <li style="position: relative;">
+          <a routerLink="cart"><i class="bi bi-cart"></i></a>
+          <span class="cart-count">0</span>
+        </li>
+      </ul>
+      <div class="burger-menu">
+        <i class="bi bi-list"></i>
+      </div>
+    </div>
+  </header>
+  

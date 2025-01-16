@@ -1,0 +1,33 @@
+<div class="card" style="max-width: 320px">
+  <div routerLink="/productPage/{{product._id}}">
+
+    <img [src]="'http://localhost:3000/images/' + product.image" class="card-img-top" [alt]="product.name" />
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">{{ product.details }}</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="h5 mb-0">${{ product.price }}</span>
+        <div>
+          <i class="bi bi-star-fill text-warning"></i>
+          <i class="bi bi-star-fill text-warning"></i>
+          <i class="bi bi-star-fill text-warning"></i>
+          <i class="bi bi-star-fill text-warning"></i>
+          <i class="bi bi-star-half text-warning"></i>
+          <small class="text-muted">({{ product.rating || 'N/A' }})</small>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between align-items-center bg-light p-3 border-top">
+      <button class="btn btn-primary btn-sm" *ngIf="!addButton" (click)="addButton = true">Add to Cart</button>
+      <div class="d-flex align-items-center gap-2" *ngIf="addButton">
+        <input type="number" class="form-control form-control-sm w-50" placeholder="Qty" [(ngModel)]="amount">
+        <button class="btn btn-danger btn-sm" addButton="fl" (click)="add()">Add</button>
+      </div>
+      <button class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-heart"></i>
+      </button>
+    </div>
+    
+  </div>
+  

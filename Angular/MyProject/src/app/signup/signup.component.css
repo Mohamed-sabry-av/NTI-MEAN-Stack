@@ -1,0 +1,124 @@
+.signup,
+.image {
+  min-height: 100vh;
+}
+
+.bgImage,
+.bg-image {
+  background-image: url('/signup.jpg'); /* تأكد من وجود الصورة في المسار الصحيح */
+  background-position: center;
+  background-size: cover; /* لجعل الصورة تغطي العنصر بالكامل */
+  border-radius: 20px;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-container {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+  width: 400px;
+  box-sizing: border-box;
+}
+
+form h2 {
+  text-align: center;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  color: #666666;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="url"],
+input[type="tel"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: none;
+}
+
+.form-group-inline {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-group-inline input[type="radio"] {
+  margin-right: 10px;
+}
+
+.form-group-inline label {
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+input[type="file"] {
+  font-size: 14px;
+}
+
+input[type="button"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+.text-center {
+  text-align: center;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+#terms + label {
+  font-size: 14px;
+  color: #666666;
+  cursor: pointer;
+}
+.msg {
+  color: red;
+  font-size: small;
+}
+input.ng-invalid.ng-touched{
+  border: 5px soild red !important;
+}

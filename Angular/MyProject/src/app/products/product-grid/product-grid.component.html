@@ -1,0 +1,5 @@
+<div class="row g-4">
+  <div class="col-md-4" *ngFor="let product of filteredProducts" >
+    <app-product-card [product]="product" (item)="addToCart($event)"></app-product-card>
+  </div>
+</div>

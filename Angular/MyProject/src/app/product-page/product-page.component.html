@@ -1,0 +1,51 @@
+
+<main class="container my-5">
+    <div class="row" *ngIf="!loading">
+        <div class="col-lg-6">
+            <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner rounded-4 shadow">
+                    <div *ngFor ="let img of data.images" class="carousel-item active">
+                        <img [src]="'http://localhost:3000/images/' + img" class="d-block w-100" alt="White Jacket Front">
+                    </div>
+                  
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ps-lg-5">
+                <h1 class="display-5 fw-bold mb-4">{{data.name}}</h1>
+                <div class="mb-4">
+                    <span class="h3 me-2">${{data.price}}</span>
+                    <!-- <span class="text-decoration-line-through text-muted">$1123</span> -->
+                    <span class="badge bg-danger ms-2">{{data.discount}}% OFF</span>
+                </div>
+                <div class="mb-4">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="me-2">
+                            <i class="bi bi-star-fill text-warning"></i>
+                            <i class="bi bi-star text-warning"></i>
+                            <i class="bi bi-star text-warning"></i>
+                            <i class="bi bi-star text-warning"></i>
+                            <i class="bi bi-star text-warning"></i>
+                        </div>
+                        <span class="text-muted">({{data.rating}}/5)</span>
+                    </div>
+                </div>
+                <p class="lead mb-4">{{data.details}}</p>
+                <div class="d-grid gap-3 d-md-flex">
+                    <button class="btn btn-lg btn-dark flex-fill">Add to Cart</button>
+                    <button class="btn btn-lg btn-primary flex-fill">Buy Now</button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" *ngIf="loading">
+            <app-spinner></app-spinner>
+        </div>
+    </div>
+</main>

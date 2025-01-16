@@ -1,0 +1,9 @@
+<div *ngIf="!isDashboardPage">
+    <app-header></app-header >
+</div>
+<div class="contentContainer">
+    <router-outlet />
+</div>
+<div  *ngIf="!isDashboardPage">
+    <app-footer></app-footer>
+</div>
