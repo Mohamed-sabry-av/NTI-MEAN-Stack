@@ -7,7 +7,6 @@ import { SignupComponent } from './signup/signup.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { ProductsComponent } from './products/products.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
-import { AdminRoutingModule } from './Admin/admin-routing.module';  
 import { guardGuard } from './guard/guard.guard';
 
 const routes: Routes = [
@@ -19,12 +18,11 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'cart', component: CartPageComponent, canActivate: [guardGuard] },
   { path: 'productPage/:id', component: ProductPageComponent },
-  { path: 'admin', loadChildren: () => import('./Admin/admin.module').then(m => m.AdminModule) },  // الـ lazy loading للموديل
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), AdminRoutingModule],  //
+  imports: [RouterModule.forRoot(routes)],  //
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

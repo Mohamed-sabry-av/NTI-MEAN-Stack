@@ -17,19 +17,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductSidebarComponent } from './products/product-sidebar/product-sidebar.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';  // Added HttpClientModule
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';  // Added HttpClientModule
 import { ProductGridComponent } from './products/product-grid/product-grid.component';
 import { SpinnerComponent } from './Shared/spinner/spinner.component';
-import { DashboardComponent } from './Admin/dashboard/dashboard.component';
-import { TopWidgetsComponent } from './Admin/dashboard/top-widgets/top-widgets.component';
-import { SideNavComponent } from './Admin/dashboard/side-nav/side-nav.component';
-import { DashHeaderComponent } from './Admin/dashboard/dash-header/dash-header.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { MainComponent } from './Admin/dashboard/main/main.component';
 import { HandelErrorIntercptor } from './Shared/interseptors/handel.error.interceptor';
-import { AdminModule } from './Admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -56,12 +50,12 @@ import { AdminModule } from './Admin/admin.module';
     FormsModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    AdminModule,
   ],
   providers: [
+    provideHttpClient(),
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: HandelErrorIntercptor,
+      useClass: HandelErrorIntercptor, // Renamed
       multi: true,
     },
   ],
