@@ -38,11 +38,18 @@ exports.CreateLogin = async (req, res) => {
           if (isMatch) {
               const token = auth.createAccessToken({userId:user._id,userName:user.name,userType:user.userType.name});
               
-              res.status(200).json({ accessToken: token })
+              // res.status(200).json({ accessToken: token })
               res.cookie('access-token',token,{
-                maxAge:60*60*24*30*100
+                maxAge:60*60*24*30*100,
+                httpOnly: true
               })
-          }
+              return res.status(200).json({
+                accessToken: token,
+                user: { id: user._id, name: user.name },
+                userType: user.userType.name,
+                userId: user._id
+              })
+            }
           else {
               res.status(400).json({ error: "this password not match" });
           }

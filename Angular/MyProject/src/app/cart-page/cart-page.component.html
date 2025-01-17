@@ -16,7 +16,7 @@
               <div class="col-md-2">
                 <div class="input-group">
                     <button class="btn btn-outline-secondary btn-sm" (click)="minusAmount(i)">-</button>
-                    <input type="number" class="form-control form-control-sm text-center" (change)="detectChange" [(ngModel)]="product.quantitiy" readonly>
+                    <input type="number" class="form-control form-control-sm text-center"[(ngModel)]="product.quantitiy" readonly>
                     <button class="btn btn-outline-secondary btn-sm" (click)="addAmount(i)">+</button>
                     
                 </div>
@@ -48,8 +48,14 @@
               <strong>Total</strong>
               <strong>${{ total }}</strong>
             </div>
-            <button class="btn btn-dark w-100 mb-3">Proceed to Checkout</button>
-            <button class="btn btn-outline-dark w-100">Continue Shopping</button>
+            <button class="btn btn-dark w-100 mb-3" (click)="addCart()">Proceed to Checkout</button>
+            <button class="btn btn-outline-dark w-100" routerLink="/products">Continue Shopping</button>
+          </div>
+          <div class="alert alert-success" role="alert" *ngIf="success">
+            <span><strong>Well Done</strong> Your Order is Successfully Send ! We will Contact With You Soon</span>
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="!LoggedIn">
+            <span>Sorry ! You have to <strong><a routerLink="/login">Login</a></strong> to Continue </span>
           </div>
         </div>
       </div>

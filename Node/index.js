@@ -22,11 +22,13 @@ const userRole = require('../node/router/UserRoleRouter')
 const user = require('../node/router/UserRouter')
 const ProductsCategory = require('../node/router/ProudctCategoryRouter')
 const Products = require('../node/router/ProductRouter')
+const cart = require('../node/router/CartRouter')
 
 //Routes
 app.use('/images',express.static('./imgs'));
 app.use('/userRole', userRole)
 app.use('/user', user)
+app.use('/cart', cart )
 app.use('/product', Products)
 app.use('/productsCategory', ProductsCategory)
 

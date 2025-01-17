@@ -35,10 +35,13 @@ export class AuthService {
     return this.database.postRequest('user/login', loginData).pipe(
       tap((res: LoginResponse) => {
         const token = res.accessToken;
+        const userId = res.userId
         if (token) {
           localStorage.setItem('accessToken', token);
+          localStorage.setItem('userId', userId);
           this.tokenSubject.next(token);
           console.log('Access Token:', token);
+          console.log('UserID:', userId);
         }
       }),
       catchError((error) => {
