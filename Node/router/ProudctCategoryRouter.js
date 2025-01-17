@@ -4,5 +4,7 @@ const ProductCategory = require("../controllers/ProductCategoryController");
 
 router.post("/", ProductCategory.CreateCategory);
 router.get("/", ProductCategory.GetCategory);
+router.put("/:id", ProductCategory.UpdateCategory);
+router.delete("/:id", ProductCategory.DeleteCategory);
 
 module.exports = router;

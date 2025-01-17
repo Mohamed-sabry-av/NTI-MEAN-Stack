@@ -73,21 +73,46 @@ exports.GetLogin = async (req, res) => {
 };
 
 
+exports.EditUser = async (req, res) => {
+  const { id } = req.params;
+  const { name, email, password, userType } = req.body; 
+  try {
+    const user = await userModel.findById(id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
 
-// exports.CreateUser = async (req, res) => {
-//     try {
-//         const User = await userModel.create(req.body);
-//         res.status(200).json(User);
-//     } catch (err) {
-//         res.status(400).json({ error: err.message });
-//     }
-// };
+    if (name) user.name = name;
+    if (email) user.email = email;
+    if (password) {
+      const hashedPassword = await hashing.hashPassword(password);
+      user.password = hashedPassword;
+    }
+    if (userType) user.userType = userType;
 
-// exports.GetUser = async (req, res) => {
-//     try {
-//         const Users = await userModel.find();
-//         res.status(200).json({ Users });
-//     } catch (err) {
-//         res.status(400).json({ error: err.message });
-//     }
-// }
+    const updatedUser = await user.save();
+
+    res.status(200).json({
+      message: "User updated successfully",
+      user: updatedUser,
+    });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+exports.DeleteUser = async (req, res) => {
+  const { id } = req.params; // استلام معرف المستخدم من الباراميترز
+  try {
+    const user = await userModel.findByIdAndDelete(id); // البحث عن المستخدم وحذفه
+    if (!user) {
+      return res.status(404).json({ error: "User not found" }); // إذا لم يتم العثور على المستخدم
+    }
+
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (err) {
+    res.status(400).json({ error: err.message }); // التعامل مع الأخطاء
+  }
+};
+
+

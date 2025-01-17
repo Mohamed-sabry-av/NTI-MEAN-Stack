@@ -29,6 +29,7 @@ import { faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { MainComponent } from './Admin/dashboard/main/main.component';
 import { HandelErrorIntercptor } from './Shared/interseptors/handel.error.interceptor';
+import { ControlProductsComponent } from './Admin/dashboard/insides/control-products/control-products.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { HandelErrorIntercptor } from './Shared/interseptors/handel.error.interc
     SideNavComponent,
     DashHeaderComponent,
     MainComponent,
+    ControlProductsComponent,
   ],
   imports: [
     BrowserModule,

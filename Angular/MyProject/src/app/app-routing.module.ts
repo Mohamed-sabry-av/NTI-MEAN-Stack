@@ -9,6 +9,7 @@ import { ProductsComponent } from './products/products.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
 import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { guardGuard } from './guard/guard.guard';
+import { ControlProductsComponent } from './Admin/dashboard/insides/control-products/control-products.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'products', component: ProductsComponent },
+  { path: 'coProduct', component: ControlProductsComponent },
   { path: 'cart', component: CartPageComponent },//,canActivate:[guardGuard]
   { path: 'dashboard', component: DashboardComponent },
   { path: 'productPage/:id', component:ProductPageComponent },
