@@ -1,55 +1,58 @@
 <div class="container py-5">
     <h2 class="mb-4 fw-bold">Shopping Cart</h2>
+    <h3 class="lead">You have <label class="fw-bold">{{cartProduct.length}}</label> item/s in your cart</h3>
     <div class="row g-4">
-        <div class="col-lg-8">
-            <div class="card shadow-sm">
-                <div class="card-body" *ngFor="let product of cartProduct">
-                    <div class="row mb-4 align-items-center">
-                        <div class="col-md-3">
-                            <img src="{{product.image}}" class="img-fluid rounded" alt="Classic Black Dress">
-                        </div>
-                        <div class="col-md-4">
-                            <h5 class="mb-2">{{product.name}}</h5>
-                            <p class="text-muted mb-0">Size: M</p>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="input-group">
-                                <button class="btn btn-outline-secondary btn-sm">-</button>
-                                <input type="text" class="form-control form-control-sm text-center" value="1" [(ngModel)]="product.quantitiy">
-                                <button class="btn btn-outline-secondary btn-sm">+</button>
-                            </div>
-                        </div>a
-                        <div class="col-md-2 text-end">
-                            <h6 class="mb-0">${{product.price}}</h6>
-                        </div>
-                        <div class="col-md-1 text-end">
-                            <button class="btn btn-link text-dark p-0"><i class="bi bi-trash"></i></button>
-                        </div>
-                    </div>
+      <div class="col-lg-8">
+        <div class="card shadow-sm">
+          <div class="card-body" *ngFor="let product of cartProduct; let i = index">
+            <div class="row mb-4 align-items-center">
+              <div class="col-md-3">
+                <img [src]="'http://localhost:3000/images/' + product.item.image" class="img-fluid rounded" alt="Classic Black Dress">
+              </div>
+              <div class="col-md-4">
+                <h5 class="mb-2">{{ product.item.name }}</h5>
+                <p class="text-muted mb-0">Size: M</p>
+              </div>
+              <div class="col-md-2">
+                <div class="input-group">
+                    <button class="btn btn-outline-secondary btn-sm" (click)="minusAmount(i)">-</button>
+                    <input type="number" class="form-control form-control-sm text-center" (change)="detectChange" [(ngModel)]="product.quantitiy" readonly>
+                    <button class="btn btn-outline-secondary btn-sm" (click)="addAmount(i)">+</button>
+                    
                 </div>
+              </div>
+              <div class="col-md-2 text-end">
+                <h6 class="mb-0">${{ product.item.price * product.quantitiy }}</h6>
+              </div>
+              <div class="col-md-1 text-end">
+                <button class="btn btn-link text-dark p-0" (click)="removeFromCart(i)"><i class="bi bi-trash"></i></button>
+              </div>
             </div>
+          </div>
         </div>
-        <div class="col-lg-4">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title mb-4">Order Summary</h5>
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Subtotal</span>
-                        <span>$ {{product.price * product.quantitiy}}</span>
-                    </div>
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Tax</span>
-                        <span>$37.80</span>
-                    </div>
-                    <hr>
-                    <div class="d-flex justify-content-between mb-4">
-                        <strong>Total</strong>
-                        <strong>$415.80</strong>
-                    </div>
-                    <button class="btn btn-dark w-100 mb-3">Proceed to Checkout</button>
-                    <button class="btn btn-outline-dark w-100">Continue Shopping</button>
-                </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title mb-4">Order Summary</h5>
+            <div class="d-flex justify-content-between mb-3">
+              <span>Subtotal</span>
+              <!-- <span>${{ calculateSubtotal() }}</span> -->
             </div>
+            <div class="d-flex justify-content-between mb-3">
+              <span>Tax</span>
+              <!-- <span>${{ calculateTax() }}</span> -->
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between mb-4">
+              <strong>Total</strong>
+              <strong>${{ total }}</strong>
+            </div>
+            <button class="btn btn-dark w-100 mb-3">Proceed to Checkout</button>
+            <button class="btn btn-outline-dark w-100">Continue Shopping</button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+  

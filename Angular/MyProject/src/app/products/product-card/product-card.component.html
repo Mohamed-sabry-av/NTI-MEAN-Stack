@@ -22,11 +22,10 @@
       <button class="btn btn-primary btn-sm" *ngIf="!addButton" (click)="addButton = true">Add to Cart</button>
       <div class="d-flex align-items-center gap-2" *ngIf="addButton">
         <input type="number" class="form-control form-control-sm w-50" placeholder="Qty" [(ngModel)]="amount">
-        <button class="btn btn-danger btn-sm" addButton="fl" (click)="add()">Add</button>
+        <button class="btn btn-danger btn-sm"  (click)="add();addButton=false">Add</button>
       </div>
       <button class="btn btn-outline-secondary btn-sm">
-        <i class="bi bi-heart"></i>
-      </button>
+        <i class="bi bi-heart"></i>      </button>
     </div>
     
   </div>

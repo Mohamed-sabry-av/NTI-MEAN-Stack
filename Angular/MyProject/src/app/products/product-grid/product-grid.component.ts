@@ -58,22 +58,23 @@ export class ProductGridComponent implements OnInit {
 
   }
   
-  addToCart(event:any){
-    if("cart" in localStorage){
-      this.cartProduct = JSON.parse(localStorage.getItem("cart")!)
-      let exist = this.cartProduct.find(item => item.item._id == event.item._id)
-      if(exist){
-        console.log('Product is already There')
-      }else{
-      this.cartProduct.push(event)
-      localStorage.setItem("cart",JSON.stringify(this.cartProduct))
-      }
-    }else{
-      this.cartProduct.push(event)
-      localStorage.setItem("cart",JSON.stringify(this.cartProduct))
+  addToCart(event: any): void {
+    if ("cart" in localStorage) {
+      this.cartProduct = JSON.parse(localStorage.getItem("cart")!); 
+    } else {
+      this.cartProduct = [];
     }
- 
+      let exist = this.cartProduct.find(item => item.item._id === event.item._id);
+    if (exist) {
+      console.log('Product is already in the cart');
+    } else {
+      this.cartProduct.push(event);
+      localStorage.setItem("cart", JSON.stringify(this.cartProduct)); 
+      console.log('Product added to cart');
+    }
+  
+    console.log("Updated Cart: ", this.cartProduct);
   }
-
+  
   }
   

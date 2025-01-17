@@ -8,23 +8,6 @@ import { DataBaseService } from './data-base.service';
   providedIn: 'root'
 })
 export class ProductsService {
-  // getCategories() {
-  //   throw new Error('Method not implemented.');
-  // }
-
-  // constructor(private http: HttpClient) { }
-
-  //Products APIs
-  // ApiURL = 'http://localhost:3000/product'; 
-  // UploadImage = 'http://localhost:3000/images'; 
-
-
-  // getAllProducts(): Observable<any> {
-  //   return this.http.get<any>(this.ApiURL); 
-  // }
-  
-
-  
 // درس ال SingleTone
   database = inject(DataBaseService)
 
