@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './product-card.component.css'
 })
 export class ProductCardComponent {
-  @Input() product: any; // للحصول على المنتج من المكون الأب
+  @Input() product: any; 
   @Output() item = new EventEmitter()
 
   addButton:boolean = false;

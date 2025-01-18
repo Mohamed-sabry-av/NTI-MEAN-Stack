@@ -17,7 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductSidebarComponent } from './products/product-sidebar/product-sidebar.component';
 import { ProductCardComponent } from './products/product-card/product-card.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';  // Added HttpClientModule
 import { ProductGridComponent } from './products/product-grid/product-grid.component';
 import { SpinnerComponent } from './Shared/spinner/spinner.component';
 import { DashboardComponent } from './Admin/dashboard/dashboard.component';
@@ -29,7 +29,7 @@ import { faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { MainComponent } from './Admin/dashboard/main/main.component';
 import { HandelErrorIntercptor } from './Shared/interseptors/handel.error.interceptor';
-import { ControlProductsComponent } from './Admin/dashboard/insides/control-products/control-products.component';
+import { AdminModule } from './Admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -48,34 +48,28 @@ import { ControlProductsComponent } from './Admin/dashboard/insides/control-prod
     CartPageComponent,
     ProductGridComponent,
     SpinnerComponent,
-    DashboardComponent,
-    TopWidgetsComponent,
-    SideNavComponent,
-    DashHeaderComponent,
-    MainComponent,
-    ControlProductsComponent,
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule, // Moved here
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     FontAwesomeModule,
     ReactiveFormsModule,
+    AdminModule,
   ],
   providers: [
-    provideHttpClient(),
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: HandelErrorIntercptor, // Renamed
+      useClass: HandelErrorIntercptor,
       multi: true,
     },
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Keep only if necessary
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],  // Remove if not necessary
   bootstrap: [AppComponent],
 })
 export class AppModule {
   constructor() {
-    library.add(faMoneyBill); // Moved here
+    library.add(faMoneyBill);  // Keep here for initializing icons
   }
 }

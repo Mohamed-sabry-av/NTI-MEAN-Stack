@@ -43,11 +43,9 @@ export class ProductGridComponent implements OnInit {
   applyFilters(): void {
     this.ProductsComponent.loading = true
     if (this.filteredCategories.length === 0) {
-      // إذا لم يتم تطبيق فلاتر، عرض كل المنتجات
       this.filteredProducts = [...this.products];
       console.log('No filters applied, showing all products:', this.filteredProducts);
     } else {
-      // تطبيق الفلترة باستخدام `category` كـ `ObjectId`
       this.filteredProducts = this.products.filter((product) =>
         this.filteredCategories.includes(product.category),
       this.ProductsComponent.loading = false

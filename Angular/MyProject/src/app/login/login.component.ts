@@ -18,14 +18,12 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router
   ) {
-    // إعداد الفورم
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
 
-  // دالة تسجيل الدخول
   login() {
     if (this.loginForm.invalid) {
       console.log('Please fill in valid credentials');
@@ -46,35 +44,4 @@ export class LoginComponent {
       },
     });
   }
-  // ngOnInit(): void {
-  //   this.loginForm = this.fb.group({
-  //     email: ['', [Validators.required, Validators.email]],
-  //     password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-  //   });
-  // }
-
-  // login() {
-  //   if (this.loginForm.valid) {
-  //     this.loading = true;
-  //     this._auths.login(this.loginForm.value).subscribe({
-  //       next: () => {
-  //         this.loading = false;
-
-  //         const userType = localStorage.getItem('userType');
-
-  //         if (userType === 'Admin') {
-  //           this._router.navigate(["/dashboard"]);
-  //         } else {
-  //           this._router.navigate(["/user-dashboard"]);
-  //         }
-  //       },
-  //       error: (err: { message: any; }) => {
-  //         this.loading = false;
-  //         console.log(err.message);
-  //       }
-  //     });
-  //   } else {
-  //     console.log('Form is invalid');
-  //   }
-  // }
 }

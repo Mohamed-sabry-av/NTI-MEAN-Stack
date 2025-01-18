@@ -1,0 +1,234 @@
+.main-content {
+    flex-grow: 1;
+    background-color: white;
+    padding: 30px;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Section Titles */
+.section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form Styling */
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section h2 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.size-options {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.size-btn {
+    background-color: #f1f1f1;
+    padding: 12px 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 1rem;
+}
+
+.size-btn:hover,
+.size-btn.active {
+    background-color: #0066ff;
+    color: white;
+}
+
+.image-upload input {
+    padding: 12px;
+    margin-bottom: 15px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.image-preview {
+    max-width: 100%;
+    height: auto;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Buttons */
+/* Primary Button */
+.btn-primary {
+    background-color: #007bff; /* Blue color */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 10px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary:active {
+    background-color: #004085; /* Even darker blue */
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: #f8f9fa; /* Light gray */
+    color: #333; /* Dark text */
+    border: 1px solid #ccc;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #e2e6ea; /* Slightly darker gray */
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:active {
+    background-color: #d6d8db; /* Even darker gray */
+    transform: translateY(1px);
+}
+
+/* Icon Button */
+.btn-icon {
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-icon:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.btn-icon:active {
+    background-color: rgba(0, 123, 255, 0.2);
+    transform: scale(1);
+}
+
+/* Disabled State */
+button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Full-Width Button */
+.btn-fullwidth {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 15px;
+    font-size: 1rem;
+}
+
+/* Rounded Button */
+.btn-rounded {
+    border-radius: 50px;
+}
+
+/* Small Button
+.btn-small {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+} */
+
+/* Large Button */
+.btn-large {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+}
+
+/* Action Buttons */
+.form-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.form-actions button {
+    width: auto;
+}
+@media (max-width: 768px) {
+    
+    .main-content {
+        padding: 20px;
+    }
+
+    .form-section {
+        margin-bottom: 25px;
+    }
+
+    .size-options {
+        flex-wrap: wrap;
+    }
+}
+.error {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+  

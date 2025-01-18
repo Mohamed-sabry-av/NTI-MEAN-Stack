@@ -7,10 +7,8 @@ import { SignupComponent } from './signup/signup.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { ProductsComponent } from './products/products.component';
 import { CartPageComponent } from './cart-page/cart-page.component';
-import { DashboardComponent } from './Admin/dashboard/dashboard.component';
+import { AdminRoutingModule } from './Admin/admin-routing.module';  
 import { guardGuard } from './guard/guard.guard';
-import { ControlProductsComponent } from './Admin/dashboard/insides/control-products/control-products.component';
-
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,15 +17,14 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'products', component: ProductsComponent },
-  { path: 'coProduct', component: ControlProductsComponent },
-  { path: 'cart', component: CartPageComponent },//,canActivate:[guardGuard]
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'productPage/:id', component:ProductPageComponent },
+  { path: 'cart', component: CartPageComponent, canActivate: [guardGuard] },
+  { path: 'productPage/:id', component: ProductPageComponent },
+  { path: 'admin', loadChildren: () => import('./Admin/admin.module').then(m => m.AdminModule) },  // الـ lazy loading للموديل
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), AdminRoutingModule],  //
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

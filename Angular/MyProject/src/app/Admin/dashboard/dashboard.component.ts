@@ -1,28 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  faLocation,
-  faShop,
-  faBoxes,
-  faMoneyBill,
-} from '@fortawesome/free-solid-svg-icons';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user.model';
+import { OrderService } from '../../services/order.service';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: false,
-  
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent  implements OnInit  {
-  faLocation = faLocation;
-  faShop = faShop;
-  faBoxes = faBoxes;
-  faMoneyBill = faMoneyBill;
-
-  constructor() { }
-
+export class DashboardComponent implements OnInit{
+  users!:User[]
+  numberOfUser!:Number;
+  numberOfOrders!:Number;
+  numberOfProducts!:Number;
+ constructor(private userService:UserService,
+  private orderService:OrderService,
+  private productService:ProductService
+ ){}
   ngOnInit(): void {
+   this.userService.getUsers().subscribe((response)=>{
+    console.log("response");
+    console.log(response);
+    this.users=response.data;
+    this.numberOfUser=this.users.length;
+   })
+   this.orderService.getNumberOfOrders().subscribe((response)=>{
+    console.log(response)
+    this.numberOfOrders=response.data.length;
+   })
+   this.productService.getProducts().subscribe((response)=>{
+    console.log(response)
+    this.numberOfProducts=response.data.length;
+   })
   }
-  title = 'dashboard';
 
 }
