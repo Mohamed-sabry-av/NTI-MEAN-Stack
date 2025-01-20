@@ -1,0 +1,15 @@
+
+.sidebar {position: sticky;top: 0;height: 100vh;padding-top: 20px;  
+}  
+  
+.sidebar-heading {font-size: 1.2rem;font-weight: bold;margin-bottom: 15px;  
+}  
+  
+h1.h2 {margin-top: 20px;margin-bottom: 20px;  
+}  
+  
+.table th {background-color: #f8f9fa;  
+}  
+  
+.table td {vertical-align: middle;  
+}  
