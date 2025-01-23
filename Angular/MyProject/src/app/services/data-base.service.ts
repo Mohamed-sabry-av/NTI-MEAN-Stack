@@ -27,5 +27,12 @@ export class DataBaseService {
     return this.http.post<LoginResponse>(`http://localhost:3000/${name}`,data)
   }
 
+  deleteRequest<T>(name:string,id:any):Observable<LoginResponse>{
+    return this.http.delete<LoginResponse>(`http://localhost:3000/${name}/${id}`)
+  }
+
+  editRequest<T>(name:string,id:any,data:any):Observable<LoginResponse>{
+    return this.http.put<LoginResponse>(`http://localhost:3000/${name}/${id}`,data)
+  }
 
 }
