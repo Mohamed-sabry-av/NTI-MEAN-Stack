@@ -1,0 +1,6 @@
+.small-image {
+    width: 50px; /* عرض الصورة */
+    height: 50px; /* ارتفاع الصورة */
+    object-fit: cover; /* لضبط الصورة داخل الحاوية */
+    border-radius: 15px;
+  }

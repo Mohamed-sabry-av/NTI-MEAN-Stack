@@ -1,0 +1,234 @@
+isModelOpen: boolean = false;
+  productForm !: FormGroup;
+  products: any[] = [];
+  categories: any[] = [];
+  response$!: Observable<any>;
+  success= false
+  
+  constructor(
+    private productsService: ProductsService,
+    private categoryService: CategoriesService,
+    private fb: FormBuilder
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.getAllProaducts()
+    this.categoryService.getAllCategories().subscribe((category) => {
+      this.categories = category.Categories;
+    });
+    this.doForm();
+  }
+  
+  getAllProaducts(){
+    this.productsService.getAllProducts().subscribe((products) => {
+      this.products = products;
+    });
+  }
+  doForm() {
+    this.productForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      details: ['', [Validators.required, Validators.minLength(10)]], // تأكد من تطابق الاسم مع الباك اند
+      price: ['', [Validators.required, Validators.min(1)]],
+      category: ['', Validators.required],
+      image: [null, Validators.required], // تغيير القيمة الابتدائية إلى null
+      discount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+      rating: ['', [Validators.required, Validators.min(0), Validators.max(5)]],
+      images: [null], // إزالة التحقق الإلزامي إذا كانت الصور الإضافية اختيارية
+    });
+  }
+
+  openModel() {
+    this.isModelOpen = true;
+  }
+  closeModel() {
+    this.isModelOpen = false;
+  }
+  uploadFile(event:any) {
+    console.log('file selected!');
+    const file = (event.target as HTMLInputElement).files;
+    this.productForm.patchValue({
+    image: file
+    })
+    this.productForm.get('image')?.updateValueAndValidity();
+  }
+
+  onFileSelect(event: any, type: string) {
+    const files = event.target.files;
+    
+    if (type === 'image' && files.length > 0) {
+      this.productForm.patchValue({ image: files[0] });
+      this.productForm.get('image')?.updateValueAndValidity();
+    } 
+    else if (type === 'images' && files.length > 0) {
+      this.productForm.patchValue({ images: files });
+      this.productForm.get('images')?.updateValueAndValidity();
+    }
+  }
+
+  uploadMultipleFiles(event: any) {
+    const files = event.target?.files;
+    if (!files) return;
+    
+    const currentImages = this.productForm.get('images')?.value || [];
+    const newImages = [...currentImages, ...Array.from(files)];
+    
+    this.productForm.patchValue({ images: newImages });
+  }
+
+  onSubmit() {
+    const formData = new FormData();
+  
+    // إضافة الحقول الأساسية
+    formData.append('name', this.productForm.get('name')?.value);
+    formData.append('description', this.productForm.get('details')?.value); // تغيير من details إلى description إذا لزم الأمر
+    formData.append('price', this.productForm.get('price')?.value);
+    formData.append('categoryName', this.productForm.get('category')?.value); // تغيير المفتاح إلى categoryName
+    formData.append('discount', this.productForm.get('discount')?.value);
+    formData.append('rating', this.productForm.get('rating')?.value);
+  
+    // إضافة الصورة الرئيسية
+    formData.append('image', this.productForm.get('image')?.value);
+  
+    // إضافة الصور الإضافية
+    const additionalImages = this.productForm.get('images')?.value;
+    if (additionalImages) {
+      for (let img of additionalImages) {
+        formData.append('images', img);
+      }
+    }
+  
+    this.response$ = this.productsService.PostProduct(formData);
+    this.response$.subscribe(
+      res => {
+        if (res) {
+          this.success = true;
+          this.closeModel();
+          this.getAllProaducts(); // تحديث القائمة بعد الإضافة
+        }
+      },
+      err => {
+        console.error('Error creating product:', err);
+      }
+    );
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  import { Component, OnInit } from '@angular/core';
+import { ProductsService } from '../../services/products.service';
+import { CategoriesService } from '../../services/categories.service';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-dash-products',
+  standalone: false,
+  templateUrl: './dash-products.component.html',
+  styleUrls: ['./dash-products.component.css'], // Fixed typo
+})
+export class DashProductsComponent implements OnInit {
+  isModelOpen = false;
+  products: any[] = [];
+  categories: any[] = [];
+  productForm!: FormGroup;
+
+  constructor(
+    private productsService: ProductsService,
+    private categoriesService: CategoriesService,
+    private fb: FormBuilder
+  ) {
+    this.formValidations()
+  }
+
+  ngOnInit(): void {
+    this.allProduct();
+    this.allCategories();
+  }
+
+  formValidations(){
+    this.productForm = this.fb.group({
+      name: ['', Validators.required],
+      price: ['', [Validators.required, Validators.min(0)]],
+      category: ['', Validators.required],
+      details: ['', Validators.required],
+      discount: ['', [Validators.min(0), Validators.max(100)]],
+      rating: ['', [Validators.min(0), Validators.max(5)]],
+      image: [null, Validators.required],
+      images: [null],
+    });
+  }
+
+  //GET ALL PRODUCTS
+  allProduct() {
+    this.productsService.getAllProducts().subscribe((data) => {
+      console.log('Products:', data);
+      this.products = Array.isArray(data) ? data : [];
+    });
+  }
+  //GET ALL CATAGORIES
+  allCategories() {
+    this.categoriesService.getAllCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+  }
+
+  // Open and Close Model
+  openModel(): void {
+    this.isModelOpen = true;
+  }
+
+  closeModel(): void {
+    this.isModelOpen = false;
+  }
+
+  // File Upload
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.productForm.patchValue({ image: file }); // تصحيح هنا
+    }
+  }
+
+  // Add Product to DB
+  addProduct() {
+    let formData = new FormData();
+    formData.append('name', this.productForm.get('name')?.value);
+    formData.append('price', this.productForm.get('price')?.value);
+    formData.append('category', this.productForm.get('category')?.value);
+    formData.append('details', this.productForm.get('details')?.value);
+    formData.append('discount', this.productForm.get('discount')?.value);
+    formData.append('rating', this.productForm.get('rating')?.value);
+    formData.append('image', this.productForm.get('image')?.value);
+    formData.append('images', this.productForm.get('images')?.value);
+
+    this.productsService.PostProduct(formData).subscribe((data) => {
+      console.log(data);
+    });
+  }
+}

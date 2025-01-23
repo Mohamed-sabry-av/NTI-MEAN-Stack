@@ -25,6 +25,7 @@ const Products = require('../node/router/ProductRouter')
 const cart = require('../node/router/CartRouter')
 
 //Routes
+// app.use('/images', express.static(path.join(__dirname, 'imgs')));
 app.use('/images',express.static('./imgs'));
 app.use('/userRole', userRole)
 app.use('/user', user)

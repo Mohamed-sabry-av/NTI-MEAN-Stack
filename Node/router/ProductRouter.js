@@ -9,6 +9,7 @@ router.post("/", upload.fields([
 ]), productController.createProduct);
 
 router.get('/', productController.getProducts);
+
 router.get('/:id', productController.getProductById);
 router.delete('/:id',productController.deleteProducts)
 router.put('/:id', upload.fields([

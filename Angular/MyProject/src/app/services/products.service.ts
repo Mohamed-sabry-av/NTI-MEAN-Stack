@@ -1,25 +1,33 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { ProductsComponent } from '../products/products.component';
-import { observable, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DataBaseService } from './data-base.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductsService {
-// درس ال SingleTone
-  database = inject(DataBaseService)
+  constructor(private _http: HttpClient) {}
 
-  getAllProducts(): Observable<any>{
-    return this.database.getRequest('product')
+  // درس ال SingleTone
+  database = inject(DataBaseService);
+
+  getAllProducts(): Observable<any> {
+    return this.database.getRequest('product');
+  }
+  PostProduct(productForm: FormData): Observable<any> {
+    return this.database.postRequest('product', productForm);
   }
 
-  uploadImages():Observable<any>{
-    return this.database.getRequest('images')
+  uploadImages(): Observable<any> {
+    return this.database.getRequest('images/');
+  }
+  uploadImagesDB(data: any): Observable<any> {
+    return this.database.postRequest('images/', data);
   }
 
-  getProductById(id:any){
-    return this.database.getRequest('product/'+id)
+  getProductById(id: any) {
+    return this.database.getRequest('product/' + id);
   }
 }

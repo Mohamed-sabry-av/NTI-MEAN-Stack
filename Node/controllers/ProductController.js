@@ -1,6 +1,6 @@
 const ProductModel = require("../models/ProdectModel");
+const Category = require("../models/ProductCategorModel"); 
 const fs = require('fs').promises;
-
 
 exports.createProduct = async (req, res) => {
     try {
@@ -10,19 +10,28 @@ exports.createProduct = async (req, res) => {
             return res.status(400).json({ error: "Main image is required" });
         }
 
-        // التحقق من وجود الصور الإضافية
-        const additionalImages = req.files.images ? req.files.images.map(file => file.filename) : [];
+        const additionalImages = req.files.images
+            ? req.files.images.map(file => file.filename)
+            : [];
+
+        const { categoryName } = req.body;
+
+        const category = await Category.findOne({ _id: categoryName });
+        if (!category) {
+            return res.status(400).json({ error: "Category not found" });
+        }
 
         const product = await ProductModel.create({
             ...req.body,
-            image: mainImage, 
-            images: additionalImages 
+            image: mainImage,
+            images: additionalImages,
+            category: category._id,
         });
         res.status(201).json(product);
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
-};
+}
 
 exports.getProducts = async (req, res) => {
     try {
