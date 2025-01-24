@@ -1,0 +1,45 @@
+.alert {
+    position: fixed;
+    top: 0;
+    left: 9%;
+    transform: translateX(-50%);
+    padding: 10px;
+    margin: 60px;
+    border-radius: 5px;
+    z-index: 1000;
+    width: 80%;
+    text-align: center;
+  }
+  
+  .alert-success {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .alert-error {
+    background-color: #f44336;
+    color: white;
+  }
+
+  .alert-animation {
+    animation: fadeInOut 3s ease-in-out;
+  }
+
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    90% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }

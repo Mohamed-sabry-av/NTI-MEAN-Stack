@@ -175,6 +175,13 @@ export class DashProductsComponent implements OnInit {
     }
   }
 
+  onConfirmDelete(result: boolean): void {
+    if (result) {
+      this.deleteProduct();
+    }
+    this.productToDelete = null;
+  }
+
   updateProduct() {
     let formData = new FormData();
     console.log('FormData:', Array.from(formData.entries()));

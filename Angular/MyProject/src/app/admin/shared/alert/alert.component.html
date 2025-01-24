@@ -1,0 +1,5 @@
+<div *ngIf="isVisible" 
+     [ngClass]="{'alert-success': type === 'success', 'alert-error': type === 'error', 'alert-animation': true}" 
+     class="alert">
+  {{ message }}
+</div>

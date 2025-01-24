@@ -18,6 +18,18 @@ exports.GetCategory = async (req, res) => {
     }
 }
 
+exports.GetCategoryByID = async (req, res) => {
+    try {
+        const Categories = await ProductsCategory.findById(req.params.id);
+        if(!Categories) {
+            return res.status(404).json({ error: "Category not found" });
+        }
+        res.status(200).json({ Categories });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+}
+
 exports.DeleteCategory = async (req, res) => {
     const { id } = req.params; 
     try {
