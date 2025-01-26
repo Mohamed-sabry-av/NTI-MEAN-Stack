@@ -14,7 +14,8 @@ exports.createProduct = async (req, res) => {
             ? req.files.images.map(file => file.filename)
             : [];
 
-        const { categoryName } = req.body;
+
+        const { categoryName , isFeatured} = req.body;
 
         const category = await Category.findOne({ _id: categoryName });
         if (!category) {
@@ -26,6 +27,7 @@ exports.createProduct = async (req, res) => {
             image: mainImage,
             images: additionalImages,
             category: category._id,
+            isFeatured: isFeatured || false,
         });
         res.status(201).json(product);
     } catch (err) {
@@ -35,6 +37,13 @@ exports.createProduct = async (req, res) => {
 
 exports.getProducts = async (req, res) => {
     try {
+        // خاص بال صفحة الرئيسية
+        const { isFeatured } = req.query; 
+        const filter = {};
+        if (isFeatured !== undefined) {
+            filter.isFeatured = isFeatured === 'true';
+        }
+
         const products = await ProductModel.find();
         res.status(200).json(products);
     } catch (err) {

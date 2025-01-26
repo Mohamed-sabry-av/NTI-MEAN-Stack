@@ -24,6 +24,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { HandelErrorIntercptor } from './Shared/interseptors/handel.error.interceptor';
+import { LikedComponent } from './liked/liked.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { HandelErrorIntercptor } from './Shared/interseptors/handel.error.interc
     CartPageComponent,
     ProductGridComponent,
     SpinnerComponent,
+    LikedComponent,
   ],
   imports: [
     BrowserModule,

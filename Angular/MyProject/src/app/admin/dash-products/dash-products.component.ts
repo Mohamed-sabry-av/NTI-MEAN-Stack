@@ -49,6 +49,8 @@ export class DashProductsComponent implements OnInit {
     discount: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
     rating: ['', [Validators.required, Validators.min(0), Validators.max(5)]],
     images: [null], 
+    isFeatured: [false],
+
   })}
 
   allProducts(){
@@ -60,7 +62,7 @@ export class DashProductsComponent implements OnInit {
 
   allCategories(){
     this.categoriesService.getAllCategories().subscribe((category) => {
-      console.log('Categories:', category); // تحقق من البيانات هنا
+      console.log('Categories:', category); 
       this.categories = category.Categories;
     });
   }
@@ -77,7 +79,8 @@ export class DashProductsComponent implements OnInit {
         discount: product.discount,
         rating: product.rating,
         image: product.image,
-        images: product.images
+        images: product.images,
+        isFeatured: product.isFeatured, 
       });
     } else {
       this.editingProduct = null;
@@ -127,6 +130,8 @@ export class DashProductsComponent implements OnInit {
     formData.append('details', this.productForm.get('details')?.value);
     formData.append('discount', this.productForm.get('discount')?.value);
     formData.append('rating', this.productForm.get('rating')?.value);
+    formData.append('isFeatured', this.productForm.get('isFeatured')?.value);
+
 
     const mainImage = this.productForm.get('image')?.value;
     if (mainImage instanceof File) {
@@ -192,6 +197,8 @@ export class DashProductsComponent implements OnInit {
     formData.append('details', this.productForm.get('details')?.value);
     formData.append('discount', this.productForm.get('discount')?.value);
     formData.append('rating', this.productForm.get('rating')?.value);
+    formData.append('isFeatured', this.productForm.get('isFeatured')?.value);
+
 
     const mainImage = this.productForm.get('image')?.value;
     if (mainImage instanceof File) {

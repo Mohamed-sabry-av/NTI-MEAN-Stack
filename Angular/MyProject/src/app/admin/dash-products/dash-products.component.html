@@ -12,6 +12,7 @@
           <th>Name</th>
           <th>Price</th>
           <th>Category</th>
+          <th>Featured?</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -28,6 +29,7 @@
           <td>{{ product.name }}</td>
           <td>${{ product.price }}</td>
           <td>{{ product.category }}</td>
+          <td>{{ product.isFeatured ? 'Yes' : 'No' }}</td>
           <td>
             <button class="btn btn-warning btn-sm" (click)="openModel(product)">
               Edit
@@ -210,6 +212,22 @@
               >
             </div>
           </div>
+          
+          <div class="form-check form-switch mb-4">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="isFeatured"
+              formControlName="isFeatured"
+            />
+            <label class="form-check-label" for="isFeatured">
+              <b> Feature this product on the homepage </b>
+            </label>
+            <small class="text-muted d-block mt-1">
+              Enable this to display the product in the featured section.
+            </small>
+          </div>
+          
 
           <div class="mb-3">
             <label for="rating" class="form-label">Rating</label>
@@ -234,6 +252,7 @@
               multiple
             />
           </div>
+
           <div class="modal-footer">
             <button
               type="button"

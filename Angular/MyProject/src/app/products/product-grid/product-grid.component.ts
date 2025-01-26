@@ -14,7 +14,7 @@ export class ProductGridComponent implements OnInit {
   filteredProducts: any[] = [];  
   filteredCategories: string[] = []; 
   cartProduct:any[]=[]
-
+  
   constructor(
     private sharedService: SharedService,
     private productsService: ProductsService,

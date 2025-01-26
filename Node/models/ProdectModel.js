@@ -32,7 +32,11 @@ const ProductSchema =new mongoose.Schema(
         },
         images:[{
             type:String
-        }]
+        }],
+        isFeatured:{
+            type:Boolean,
+            default:false
+        }
         
     }
 )

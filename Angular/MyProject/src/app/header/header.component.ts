@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { LikedService } from '../services/liked.service';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +11,10 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent implements OnInit{
-  constructor(private _authS:AuthService,private _router: Router){}
-    isLoggedIn = false
+  isLoggedIn = false
+  likedProductsCount:number =0
+
+  constructor(private _authS:AuthService,private _router: Router,private likedProductsService:LikedService ){}
   ngOnInit(): void {
    this._authS.getAccessToken().subscribe(data => {
     if(data){
@@ -28,5 +31,11 @@ export class HeaderComponent implements OnInit{
    
     this._router.navigate(['login'])
    this._authS.logout();
+  }
+
+  likedProduct(){
+    this.likedProductsService.likedProducts$.subscribe((products: any[]) => {
+      this.likedProductsCount = products.length; // تحديث العدد
+    })
   }
 }

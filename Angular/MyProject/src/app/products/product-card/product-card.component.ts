@@ -10,6 +10,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ProductCardComponent {
   @Input() product: any; 
   @Output() item = new EventEmitter()
+  @Output() liked = new EventEmitter<any>(); 
+
 
   addButton:boolean = false;
   amount:number = 0
@@ -24,6 +26,10 @@ export class ProductCardComponent {
 
   add(){
     this.item.emit({item:this.product,quantitiy:this.amount})
+  }
+  
+  likedProduct():void{
+    this.liked.emit(this.product)
   }
   
 }
