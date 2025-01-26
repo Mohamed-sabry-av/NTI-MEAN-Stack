@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'cart', component: CartPageComponent, canActivate: [guardGuard] },
   { path: 'productPage/:id', component: ProductPageComponent },
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [guardGuard] },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 

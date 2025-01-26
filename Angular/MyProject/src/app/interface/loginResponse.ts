@@ -4,5 +4,6 @@ export interface LoginResponse {
     accessToken: string;
     user: User; 
     userType:string;
-    userId:string
+    roleName:string;
+    userId:string;
   }

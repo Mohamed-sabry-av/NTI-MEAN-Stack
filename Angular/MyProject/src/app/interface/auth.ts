@@ -1,8 +1,19 @@
 export interface User{
-    length: number;
-
-    id: string;
-    fullName: string;
+    length?: number;
+    _id?: string;
+    fullName?: string;
+    name?: string;
     email: string;
-    password: string
+    password: string;
+    userType: string|UserType;   
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+export interface UserType{
+    _id: string;
+    name: string;
+    RoleDetails?: string;
+    createdAt?: string;
+    updatedAt?: string;
 }

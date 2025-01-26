@@ -1,2 +1,160 @@
-<div id="users" class="tab-pane fade">
+<div id="users" class="tab-pane fade show active">
+  <div>
     <h2>Manage Users</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userList">
+          <td>{{ user._id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.type?.name }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" (click)="editUser(user)">
+              Edit
+            </button>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="confirmDeleteUser(user._id)"
+            >
+              Delete
+            </button>
+            <!-- </td> -->
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Dark background overlay -->
+<div *ngIf="isModelOpen || userToDelete" class="modal-backdrop fade show" (click)="closeModel()"></div>
+
+<!-- Alert Message -->
+<app-alert [message]="alertMessage" [type]="alertType" [isVisible]="showSnackBar"></app-alert>
+
+<!-- Modal -->
+<div
+  [ngClass]="{ fade: true, show: isModelOpen }"
+  [style.display]="isModelOpen ? 'block' : 'none'"
+>
+  <div class="modal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            {{ editingUser ? "Edit User" : "Update User Information and Role" }}
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            aria-label="Close"
+            (click)="closeModel()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="usersForm" (ngSubmit)="saveUser()">
+            <div class="mb-3">
+              <label for="name" class="form-label">User Name</label>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                id="name"
+                required
+              />
+              <div
+                *ngIf="
+                  usersForm.get('name')?.touched &&
+                  usersForm.get('name')?.invalid
+                "
+                class="text-danger"
+              >
+                <small *ngIf="usersForm.get('name')?.errors?.['required']"
+                  >Name is required.</small
+                >
+                <small *ngIf="usersForm.get('name')?.errors?.['minlength']"
+                  >Name must be at least 3 characters.</small
+                >
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                formControlName="email"
+                class="form-control"
+                id="email"
+                required
+              />
+              <div
+                *ngIf="
+                  usersForm.get('email')?.touched &&
+                  usersForm.get('email')?.invalid
+                "
+                class="text-danger"
+              >
+                <small *ngIf="usersForm.get('email')?.errors?.['required']"
+                  >Email is required.</small
+                >
+                <small *ngIf="usersForm.get('email')?.errors?.['email']"
+                  >Invalid email format.</small
+                >
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="role" class="form-label">Role</label>
+              <select class="form-select" formControlName="userType">
+                <option value="Select" selected>--Select--</option>
+                <option *ngFor="let type of userTypes"  [value]="type._id">
+                  {{ type.name }}
+                </option>
+              </select>
+              <div
+                *ngIf="
+                  usersForm.get('role')?.touched &&
+                  usersForm.get('role')?.invalid
+                "
+                class="text-danger"
+              >
+                <small *ngIf="usersForm.get('role')?.errors?.['required']"
+                  >Role is required.</small
+                >
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="closeModel()"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Save changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Confirmation Dialog -->
+<app-confirmation
+[isVisible]="userToDelete !== null"
+  title="Confirm Delete"
+  message="Are you sure you want to delete this user?"
+  (confirm)="onConfirmDelete($event)"
+></app-confirmation>

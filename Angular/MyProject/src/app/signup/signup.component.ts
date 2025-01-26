@@ -5,9 +5,8 @@ import { passwordValidator } from '../customvalidators/password.validators';
 // import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 import { response } from 'express';
-// import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -21,8 +20,9 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+    // private authService: AuthService,
+    private router: Router,
+    private UserService: UserService
   ) {}
   ngOnInit(): void {
     this.signupForm = this.fb.group(
@@ -60,11 +60,11 @@ export class SignupComponent implements OnInit {
 
   submit() {
     const postData = { ...this.signupForm.value };
-    delete postData.retypepassword; // تأكد من أنك كتبت 'confirmPassword' بشكل صحيح
+    delete postData.retypepassword; // delete retypepassword from postData
 
-    postData.userType = '677f9b528515a6d75519cd7c'; // إضافة userType
+    postData.userType = '677f9b528515a6d75519cd7c'; // user
 
-    this.authService.registerUser(postData).subscribe({
+    this.UserService.registerUser(postData).subscribe({
       next: (response) => {
         localStorage.setItem('userType', response.userType);
         if (response.userType === 'admin') {

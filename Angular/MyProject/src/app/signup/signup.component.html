@@ -36,6 +36,7 @@
                     formControlName="email"
                     class="form-control rounded-pill border-0 shadow-sm px-4"
                     email
+                    autocomplete="username"
                     />
                     <div class="msg" *ngIf="email.invalid&& email.touched">*Email is required</div>
 
@@ -52,6 +53,8 @@
                   name="Password"
                   formControlName="password"
                   class="form-control rounded-pill border-0 shadow-sm px-4"
+                  autocomplete="new-password"
+
                     />
                     <div class="msg" *ngIf="password.invalid && password.touched">
                       <span *ngIf="password.errors?.['required']">*Password is required</span>
@@ -70,6 +73,7 @@
                     required 
                     formControlName="retypepassword"
                     class="form-control rounded-pill border-0 shadow-sm px-4"
+                    autocomplete="new-password"
                     />
                     <div class="msg" *ngIf="retypepassword.invalid && retypepassword.touched">
                       <span *ngIf="retypepassword.errors?.['required']"> *retype password in require </span>
@@ -83,11 +87,10 @@
                 >
                   Sign up 
                 </button>
-                   Already have account
                   <div class="text-center d-flex justify-content-between mt-4">
                     <p>
                       Already have an account?
-                      <a  class="font-italic text-muted"><u>Sign in</u></a
+                      <a  class="font-italic text-muted" routerLink="/login"><u>Sign in</u></a
                       >
                     </p>
                   </div>

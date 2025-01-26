@@ -10,7 +10,7 @@ import { LoginResponse } from '../interface/loginResponse';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(
@@ -23,6 +23,12 @@ export class LoginComponent {
       password: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
+  ngOnInit() {
+    // تأكد من أن المستخدم لا يكون قد سجل الدخول بالفعل
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/home']);
+    }
+  }
 
   login() {
     if (this.loginForm.invalid) {
@@ -34,14 +40,23 @@ export class LoginComponent {
 
     this.authService.login(loginData).subscribe({
       next: (res: LoginResponse) => {
-        console.log('Login successful:', res);
-        localStorage.setItem('user', JSON.stringify(res.user)); 
-        this.router.navigate(['/home']); 
+        if (res.accessToken) {
+          console.log('Login successful:', res);
+          localStorage.setItem('user', JSON.stringify(res.user)); 
+          localStorage.setItem('accessToken', res.accessToken); // تخزين التوكن في الـ localStorage
+    
+          // تحقق من الدور
+          if (res.userType === 'Admin') {
+            // إذا كان المستخدم "أدمن"، توجهه إلى لوحة التحكم
+            this.router.navigate(['/admin/dashboard']);
+          } else {
+            this.router.navigate(['/home']);
+          }
+        }
       },
       error: (err) => {
         console.error('Login failed:', err);
         alert('Invalid email or password');
-      },
+      }
     });
-  }
-}
+}}

@@ -10,7 +10,7 @@ let userRoleSchema = new mongoose.Schema(
         RoleDetails:{
             type:String,
             required:true,
-            maxlegnth: 200,
+            maxlength: 200,
         },
     },{timestamps:true},
 )

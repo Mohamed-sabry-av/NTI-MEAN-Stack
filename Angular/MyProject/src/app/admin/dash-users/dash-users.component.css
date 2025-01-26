@@ -1,0 +1,16 @@
+.modal {
+    display: block !important;
+    z-index: 1050; /* أو أعلى من الـ z-index الخاص ببقية العناصر */
+  }
+  
+  .modal-dialog {
+    margin-top: 100px;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  
