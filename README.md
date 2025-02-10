@@ -16,3 +16,15 @@ login page
 home responisve 
 ![responsive](https://github.com/user-attachments/assets/744350f9-10f7-4e36-b3d7-ccc8b7f2b35d)
 
+Products page
+![image](https://github.com/user-attachments/assets/73e239a8-be4d-4387-8697-fe01117d1182)
+
+wishing list
+![image](https://github.com/user-attachments/assets/ad6a06e9-f253-48f6-9bbb-fc9d9d4e6546)
+
+admin dashboard to manage products / users / categories /products in the homepage 
+![image](https://github.com/user-attachments/assets/30b36e8b-34b1-4815-b65e-64f074cba2ce)
+
+Reactive form, connected with Nodejs 
+![image](https://github.com/user-attachments/assets/b8bd342a-caea-4862-ba89-076fd816d02f)
+
